@@ -51,6 +51,10 @@ class Constants:
         for key in LOG_CHANNELS:
             LOG_CHANNELS[key] = LOG_CHANNELS["DEV"]
 
+    # Loguru constants
+    LOGURU_LEVEL: Final[str | None] = os.getenv("LOGURU_LEVEL")
+    LOGGING: Final[dict[str, str]] = config["LOGGING"]
+
     # Temp VC constants
     TEMPVC_CATEGORY_ID: Final[str | None] = os.getenv("TEMPVC_CATEGORY_ID")
     TEMPVC_CHANNEL_ID: Final[str | None] = os.getenv("TEMPVC_CHANNEL_ID")
