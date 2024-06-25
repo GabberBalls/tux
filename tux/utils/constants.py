@@ -52,8 +52,9 @@ class Constants:
             LOG_CHANNELS[key] = LOG_CHANNELS["DEV"]
 
     # Loguru constants
-    LOGURU_LEVEL: Final[str | None] = os.getenv("LOGURU_LEVEL")
-    LOGGING: Final[dict[str, str]] = config["LOGGING"]
+    LOG_LEVEL: Final[str] = os.getenv("LOG_LEVEL", "DEBUG")
+    LOG_FORMAT: Final[str] = os.getenv("LOG_FORMAT", "minimal")
+    LOG_FORMAT_OPTIONS: Final[dict[str, str]] = config["LOG_FORMAT_OPTIONS"]
 
     # Temp VC constants
     TEMPVC_CATEGORY_ID: Final[str | None] = os.getenv("TEMPVC_CATEGORY_ID")

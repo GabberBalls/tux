@@ -1,5 +1,6 @@
 import asyncio
 import contextlib
+import sys
 from typing import Any
 
 import discord
@@ -13,17 +14,10 @@ from tux.utils.console import Console
 from tux.utils.constants import Constants as CONST
 from tux.utils.sentry import setup_sentry
 
-"""
-Advanced logging and debugging setup.
-This setup is intended for debugging purposes. Ensure that you comment out loguru and replace it with the following imports as well as the remaining lines below.
-"""
-# import logging
-# import warnings
-# import tracemalloc
-
-# tracemalloc.start()
-# logging.basicConfig(level=logging.DEBUG)
-# warnings.simplefilter("error", ResourceWarning)
+logger.remove()
+log_format = CONST.LOG_FORMAT_OPTIONS[CONST.LOG_FORMAT]
+logger.add(sys.stdout, format=log_format, colorize=True, level=CONST.LOG_LEVEL)
+logger.add("logs/tux.log", format=log_format, colorize=True, level="DEBUG")
 
 
 class TuxBot(commands.Bot):
