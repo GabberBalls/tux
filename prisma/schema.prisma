@@ -50,6 +50,7 @@ model Guild {
   notes           Note[]
   reminders       Reminder[]
   guild_config    GuildConfig[]
+  Ticket          Ticket[]
 
   @@unique([guild_id])
   @@index([guild_id])
@@ -83,6 +84,21 @@ model GuildConfig {
 
   @@unique([guild_id])
   @@index([guild_id])
+}
+
+model Ticket {
+  ticket_id         BigInt    @id @default(autoincrement())
+  ticket_status     Boolean?  @default(true)
+  ticket_opener_id  BigInt // Whoever opened the ticket
+  ticket_number     BigInt? // Incremented for each case per guild via a trigger/function
+  ticket_claimer_id BigInt
+  ticket_created_at DateTime? @default(now())
+  ticket_users      BigInt[]  @default([]) // Role IDs for people currently in the ticket.
+  guild_id          BigInt
+  guild             Guild     @relation(fields: [guild_id], references: [guild_id])
+
+  @@unique([ticket_number, guild_id])
+  @@index([ticket_number, guild_id])
 }
 
 model Case {
